@@ -64,6 +64,13 @@ print(test_samples.columns)  # Displaying the column names of the dataset
 OPENAI_API_KEY = "YOUR_API_KEY"  # Replace with your actual OpenAI API key
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY  # Store the API key in the environment
 
+
+# 讀入所使用的pdf檔案
+loader = PyPDFLoader("millers-anesthesia-9ed.pdf")
+# 定義splitter，將所有文字切分成不同的chunk
+splitter = RecursiveCharacterTextSplitter(chunk_size = 800, chunk_overlap = 128)
+doc_split = loader.load_and_split(splitter)
+
 # Define the embedding model that will convert text chunks into vectors
 embeddings = OpenAIEmbeddings()
 
